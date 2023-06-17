@@ -10,8 +10,8 @@ namespace Logic_Game_Georgi
     {
         static void Main(string[] args)
         {
-            long first = 1234;
-            long second = 22213221;
+            long first = 84766;
+            long second = 946789;
             int rowLength = first.ToString().Length + 3 + second.ToString().Length; // Максимална дължина на целия израз
             long result = first * second; // Резултатът на сметката
 
@@ -24,7 +24,8 @@ namespace Logic_Game_Georgi
 
             for (int i = 0; i < secondMassive.Length; i++)
             {
-                Console.WriteLine($"{new string(' ', second.ToString().Length + 3 - i)}{first * secondMassive[i]}");
+                long sum = first * secondMassive[i];
+                Console.WriteLine($"{new string(' ', rowLength - sum.ToString().Length - i)}{sum}");
             }
 
             Console.WriteLine(new string('-', rowLength));
@@ -71,7 +72,8 @@ namespace Logic_Game_Georgi
 
             for (int i = 0; i < secondMassive.Length; i++)
             {
-                Console.WriteLine($"{new string(' ', second.ToString().Length + 3 - i)}{ConvertDigitsToLetter(first * secondMassive[i], letterToDigit, toPrint)}");
+                long sum = first * secondMassive[i];
+                Console.WriteLine($"{new string(' ', rowLength - sum.ToString().Length - i)}{ConvertDigitsToLetter(first * secondMassive[i], letterToDigit, toPrint)}");
             }
 
             Console.WriteLine(new string('-', rowLength));
