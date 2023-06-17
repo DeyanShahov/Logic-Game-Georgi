@@ -1,4 +1,10 @@
-﻿namespace Logic_Game_Georgi
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+
+
+namespace Logic_Game_Georgi
 {
     internal class Program
     {
