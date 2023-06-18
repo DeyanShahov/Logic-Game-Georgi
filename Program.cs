@@ -9,55 +9,40 @@ namespace Logic_Game_Georgi
     {
         static void Main(string[] args)
         {
-            do
+            while (true)
             {
+                Console.Clear();
                 Random random = new Random();
                 long firstParameter = 0;
                 long secondParameter = 0;
 
                 SetParameters(random, out firstParameter, out secondParameter); // Функция за въвеждане на параметрите
+                Console.WriteLine();
 
                 //-----------------------------------------------------------------------------------------------------------------------------------------------
 
                 int rowLength = firstParameter.ToString().Length + 3 + secondParameter.ToString().Length; // Максимална дължина на целия израз
                 long result = firstParameter * secondParameter; // Резултатът на умножението
- 
+
                 int[] secondMassive = secondParameter.ToString().Select(n => int.Parse(n.ToString())).Reverse().ToArray(); // Преобразуване на втория елемент в масив
 
 
-                Console.WriteLine($"{firstParameter} * {secondParameter}");
-                Console.WriteLine(new string('-', rowLength));
 
-                for (int i = 0; i < secondMassive.Length; i++)
-                {
-                    long sum = firstParameter * secondMassive[i];
-                    Console.WriteLine($"{new string(' ', rowLength - sum.ToString().Length - i)}{sum}");
-                }
-
-                Console.WriteLine(new string('-', rowLength));
-                Console.WriteLine($"{new string(' ', rowLength - result.ToString().Length)}{result}");
 
                 //-----------------------------------------------------------------------------------------------------------------------------------------------
 
 
-                List<char> letters = Enumerable.Range('A', 26).Select(x => (char)x).ToList(); // Създаване на списък с буквите от английската азбука
-
-                letters = letters.OrderBy(x => random.Next()).Take(10).ToList();  // Произволно разбъркване на списъка с буквите и избиране на първите 10
+                List<char> letters = Enumerable.Range('A', 26) // Създаване на списък с буквите от английската азбука
+                    .Select(x => (char)x)
+                    .OrderBy(x => random.Next())
+                    .Take(10) // Произволно разбъркване на списъка с буквите и избиране на първите 10
+                    .ToList();
 
                 Dictionary<int, char> letterToDigit = new Dictionary<int, char>(); // Заместване на буквите с цифрите от 0 до 9
                 for (int i = 0; i < letters.Count; i++)
                 {
                     letterToDigit[i] = letters[i];
-                }
-
-                Console.WriteLine(); // Добавяне на празен ред за визуализация
-                foreach (var kvp in letterToDigit) // Отпечатване на съответствието между буквите и цифрите
-                {
-                    Console.Write($"{kvp.Key} - {kvp.Value} / ");
-                }
-                Console.WriteLine(); // Добавяне на празен ред за визуализация
-                Console.WriteLine(); // Добавяне на празен ред за визуализация
-
+                }          
 
                 //-----------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -84,10 +69,79 @@ namespace Logic_Game_Georgi
                 Console.WriteLine(new string('-', rowLength));
                 Console.WriteLine($"{new string(' ', rowLength - result.ToString().Length)}{ConvertDigitsToLetter(result, letterToDigit, toPrint)}");
                 Console.WriteLine();
-                Console.WriteLine("За нов опит или отказване изберете Y / N");
-            }
-            while (Console.ReadLine().ToLower() != "n");
+                Console.WriteLine("За нов опит:  1");
+                Console.WriteLine("За отказване изберете: 2");
+                Console.WriteLine("За показване оригинал: 3");
+                Console.WriteLine("За показване на списак: 4");
+                int command = int.Parse(Console.ReadLine());
 
+                while (true)
+                {
+                    switch (command)
+                    {
+                        case 1:
+
+                            break;
+                        case 2:
+                            break;
+                        case 3:
+
+                            break;
+                        case 4:
+                            break;
+                        default:
+                            break;
+                    }
+
+                    if (command == 1)
+                    {
+                        return;
+                    }
+                    else if (command == 2)
+                    {
+                        return;
+                    }
+                    else if (command == 3)
+                    {
+                        RealNubers(firstParameter, secondParameter, rowLength, result, secondMassive); // Решението преди да е замаскирано
+                        Console.ReadKey(true);
+                    }
+                    else if (command == 4)
+                    {
+                        ViewDigitsToLetters(letterToDigit);
+                        Console.ReadKey(true);
+                    }
+                }
+
+
+            }
+            //while (Console.ReadLine().ToLower() != "n");
+
+        }
+
+        private static void ViewDigitsToLetters(Dictionary<int, char> letterToDigit)
+        {
+            Console.WriteLine(); // Добавяне на празен ред за визуализация
+            foreach (var kvp in letterToDigit) // Отпечатване на съответствието между буквите и цифрите
+            {
+                Console.Write($"{kvp.Key} - {kvp.Value} / ");
+            }
+            Console.WriteLine(); // Добавяне на празен ред за визуализация
+        }
+
+        private static void RealNubers(long firstParameter, long secondParameter, int rowLength, long result, int[] secondMassive)
+        {
+            Console.WriteLine($"{firstParameter} * {secondParameter}");
+            Console.WriteLine(new string('-', rowLength));
+
+            for (int i = 0; i < secondMassive.Length; i++)
+            {
+                long sum = firstParameter * secondMassive[i];
+                Console.WriteLine($"{new string(' ', rowLength - sum.ToString().Length - i)}{sum}");
+            }
+
+            Console.WriteLine(new string('-', rowLength));
+            Console.WriteLine($"{new string(' ', rowLength - result.ToString().Length)}{result}");
         }
 
         private static void SetParameters(Random random, out long firstParameter, out long secondParameter)
