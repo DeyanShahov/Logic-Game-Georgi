@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Channels;
 
 namespace Logic_Game_Georgi
 {
@@ -76,22 +75,7 @@ namespace Logic_Game_Georgi
                 int command = int.Parse(Console.ReadLine());
 
                 while (true)
-                {
-                    switch (command)
-                    {
-                        case 1:
-
-                            break;
-                        case 2:
-                            break;
-                        case 3:
-
-                            break;
-                        case 4:
-                            break;
-                        default:
-                            break;
-                    }
+                {                   
 
                     if (command == 1)
                     {
@@ -104,12 +88,12 @@ namespace Logic_Game_Georgi
                     else if (command == 3)
                     {
                         RealNubers(firstParameter, secondParameter, rowLength, result, secondMassive); // Решението преди да е замаскирано
-                        Console.ReadKey(true);
+                        Console.Read();
                     }
                     else if (command == 4)
                     {
                         ViewDigitsToLetters(letterToDigit);
-                        Console.ReadKey(true);
+                        Console.Read();
                     }
                 }
 
@@ -124,24 +108,24 @@ namespace Logic_Game_Georgi
             Console.WriteLine(); // Добавяне на празен ред за визуализация
             foreach (var kvp in letterToDigit) // Отпечатване на съответствието между буквите и цифрите
             {
-                Console.Write($"{kvp.Key} - {kvp.Value} / ");
+                Console.Write("{0} - {1} / ", kvp.Key, kvp.Value);
             }
             Console.WriteLine(); // Добавяне на празен ред за визуализация
         }
 
         private static void RealNubers(long firstParameter, long secondParameter, int rowLength, long result, int[] secondMassive)
         {
-            Console.WriteLine($"{firstParameter} * {secondParameter}");
+            Console.WriteLine("{0} * {1}", firstParameter, secondParameter);
             Console.WriteLine(new string('-', rowLength));
 
             for (int i = 0; i < secondMassive.Length; i++)
             {
                 long sum = firstParameter * secondMassive[i];
-                Console.WriteLine($"{new string(' ', rowLength - sum.ToString().Length - i)}{sum}");
+                Console.WriteLine("{0}{1}", new string(' ', rowLength - sum.ToString().Length - i), sum);
             }
 
             Console.WriteLine(new string('-', rowLength));
-            Console.WriteLine($"{new string(' ', rowLength - result.ToString().Length)}{result}");
+            Console.WriteLine("{0}{1}", new string(' ', rowLength - result.ToString().Length), result);
         }
 
         private static void SetParameters(Random random, out long firstParameter, out long secondParameter)
