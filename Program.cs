@@ -41,7 +41,7 @@ namespace Logic_Game_Georgi
                 for (int i = 0; i < letters.Count; i++)
                 {
                     letterToDigit[i] = letters[i];
-                }          
+                }
 
                 //-----------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -62,24 +62,20 @@ namespace Logic_Game_Georgi
                 for (int i = 0; i < secondMassive.Length; i++)
                 {
                     long sum = firstParameter * secondMassive[i];
-                    Console.WriteLine($"{new string(' ', rowLength - sum.ToString().Length - i)}{ConvertDigitsToLetter(firstParameter * secondMassive[i], letterToDigit, toPrint)}");
+                    Console.WriteLine("{0}{1}", new string(' ', rowLength - sum.ToString().Length - i), ConvertDigitsToLetter(firstParameter * secondMassive[i], letterToDigit, toPrint));
                 }
 
                 Console.WriteLine(new string('-', rowLength));
                 Console.WriteLine($"{new string(' ', rowLength - result.ToString().Length)}{ConvertDigitsToLetter(result, letterToDigit, toPrint)}");
-                Console.WriteLine();
-                Console.WriteLine("За нов опит:  1");
-                Console.WriteLine("За отказване изберете: 2");
-                Console.WriteLine("За показване оригинал: 3");
-                Console.WriteLine("За показване на списак: 4");
-                int command = int.Parse(Console.ReadLine());
+
+                int command = ShowMenu();
 
                 while (true)
-                {                   
+                {
 
                     if (command == 1)
                     {
-                        return;
+                        break;
                     }
                     else if (command == 2)
                     {
@@ -88,19 +84,47 @@ namespace Logic_Game_Georgi
                     else if (command == 3)
                     {
                         RealNubers(firstParameter, secondParameter, rowLength, result, secondMassive); // Решението преди да е замаскирано
-                        Console.Read();
+                        command = ShowMenu();
                     }
                     else if (command == 4)
                     {
                         ViewDigitsToLetters(letterToDigit);
-                        Console.Read();
+                        command = ShowMenu();
                     }
                 }
 
 
             }
-            //while (Console.ReadLine().ToLower() != "n");
+        }
 
+        private static void RunApp()
+        {
+
+        }
+
+        private static int ShowMenu()
+        {
+            List<string> menuOptions = new List<string> // Генерира лист със съдържанието на менюто
+            {
+                "\nЗа нов опит:  1",
+                "За отказване изберете: 2",
+                "За показване оригинал: 3",
+                "За показване на списак: 4"
+            };
+   
+            Console.WriteLine(string.Join("\n", menuOptions)); // Отпечатва менюто
+
+            string command = Console.ReadLine(); // Въвеждане на опция от потребителя
+
+
+            // Проверява дали въведената опция е реален избор, докато не получи реална опция, пита отново
+            while (!Enumerable.Range(1, menuOptions.Count).Select(x => x.ToString()).Contains(command)) 
+            {
+                Console.Write("\nНевалидна опция!\nИзберете наново: ");
+                command = Console.ReadLine();
+            }
+
+            return int.Parse(command);
         }
 
         private static void ViewDigitsToLetters(Dictionary<int, char> letterToDigit)
@@ -115,7 +139,7 @@ namespace Logic_Game_Georgi
 
         private static void RealNubers(long firstParameter, long secondParameter, int rowLength, long result, int[] secondMassive)
         {
-            Console.WriteLine("{0} * {1}", firstParameter, secondParameter);
+            Console.WriteLine("\n{0} * {1}", firstParameter, secondParameter);
             Console.WriteLine(new string('-', rowLength));
 
             for (int i = 0; i < secondMassive.Length; i++)
@@ -246,6 +270,8 @@ namespace Logic_Game_Georgi
                     secondParameter = random.Next(1, 999999999);
                     break;
             }
+
+            Console.Clear();
         }
 
         private static string ConvertDigitsToLetter(long number, Dictionary<int, char> letterToDigit, string toPrint)
