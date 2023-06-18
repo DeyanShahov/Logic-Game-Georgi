@@ -66,34 +66,32 @@ namespace Logic_Game_Georgi
                 }
 
                 Console.WriteLine(new string('-', rowLength));
-                Console.WriteLine($"{new string(' ', rowLength - result.ToString().Length)}{ConvertDigitsToLetter(result, letterToDigit, toPrint)}");
+                Console.WriteLine("{0}{1}", new string(' ', rowLength - result.ToString().Length), ConvertDigitsToLetter(result, letterToDigit, toPrint));
 
                 int command = ShowMenu();
 
-                while (true)
+                while (true) // Стартиране на нов постоянен "game loop"
                 {
 
-                    if (command == 1)
+                    if (command == 1) // Ново зареждане на задача
                     {
                         break;
                     }
-                    else if (command == 2)
+                    else if (command == 2) // Край и затваряне на приложението
                     {
                         return;
                     }
-                    else if (command == 3)
+                    else if (command == 3) // Решението преди да е замаскирано
                     {
-                        RealNubers(firstParameter, secondParameter, rowLength, result, secondMassive); // Решението преди да е замаскирано
+                        RealNubers(firstParameter, secondParameter, rowLength, result, secondMassive); 
                         command = ShowMenu();
                     }
-                    else if (command == 4)
+                    else if (command == 4) // Отпечатване на списък с цифри кум букви
                     {
                         ViewDigitsToLetters(letterToDigit);
                         command = ShowMenu();
                     }
                 }
-
-
             }
         }
 
@@ -160,7 +158,7 @@ namespace Logic_Game_Georgi
             while (!isValidNumber)
             {
 
-                Console.Write($"Въведете парвия множител до колко цифрен да е. Възможният избор е в интервала от 1 до 9: ");
+                Console.Write("Въведете парвия множител до колко цифрен да е. Възможният избор е в интервала от 1 до 9: ");
                 string input = Console.ReadLine();
 
                 if (!int.TryParse(input, out inputNumber)) // Обръщане и проверка дали въведеното е число 
@@ -218,7 +216,7 @@ namespace Logic_Game_Georgi
             while (!isValidNumber)
             {
 
-                Console.Write($"Въведете втория множител до колко цифрен да е. Възможният избор е в интервала от 1 до 9: ");
+                Console.Write("Въведете втория множител до колко цифрен да е. Възможният избор е в интервала от 1 до 9: ");
                 string input = Console.ReadLine();
 
                 if (!int.TryParse(input, out inputNumber)) // Обръщане и проверка дали въведеното е число 
