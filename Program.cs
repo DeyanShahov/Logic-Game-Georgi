@@ -15,6 +15,10 @@ namespace Logic_Game_Georgi
                 long firstParameter = 0;
                 long secondParameter = 0;
 
+                char[] charArray = Enumerable.Range('A', 26).Select(x=> (char)x).ToArray();
+                char[] symbolArray = {'/', '?', '!', '"', '#', '@', '$', '%', '&', '+', '-',
+                            '(', ')', '=', '_', '{', '}', '[', ']', '~'};
+
                 SetParameters(random, out firstParameter, out secondParameter); // Функция за въвеждане на параметрите
                 Console.WriteLine();
 
@@ -30,9 +34,9 @@ namespace Logic_Game_Georgi
 
                 //-----------------------------------------------------------------------------------------------------------------------------------------------
 
+                var selectedArray = random.Next(2) == 0 ? charArray : symbolArray; // Избирам на случаен принцип един от двата варианта на символи
 
-                List<char> letters = Enumerable.Range('A', 26) // Създаване на списък с буквите от английската азбука
-                    .Select(x => (char)x)
+                List<char> letters =  selectedArray
                     .OrderBy(x => random.Next())
                     .Take(10) // Произволно разбъркване на списъка с буквите и избиране на първите 10
                     .ToList();
@@ -107,7 +111,7 @@ namespace Logic_Game_Georgi
                 "\nЗа нов опит:  1",
                 "За отказване изберете: 2",
                 "За показване оригинал: 3",
-                "За показване на списак: 4"
+                "За показване на списък: 4"
             };
    
             Console.WriteLine(string.Join("\n", menuOptions)); // Отпечатва менюто
